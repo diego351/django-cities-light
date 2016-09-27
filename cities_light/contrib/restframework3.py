@@ -24,7 +24,7 @@ from rest_framework import routers
 try:
     from django.conf.urls.defaults import patterns, url, include
 except ImportError:
-    from django.conf.urls import patterns, url, include
+    from django.conf.urls import url, include
 
 from ..loading import get_cities_models
 
@@ -122,7 +122,4 @@ router.register(r'countries', CountryModelViewSet,
 router.register(r'regions', RegionModelViewSet,
                 base_name='cities-light-api-region')
 
-
-urlpatterns = [
-    url(r'^', include(router.urls)),
-]
+urlpatterns = url(r'^', include(router.urls)),
