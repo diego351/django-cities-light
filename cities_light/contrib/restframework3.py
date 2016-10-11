@@ -20,6 +20,7 @@ And that's all !
 from rest_framework import viewsets, relations
 from rest_framework.serializers import HyperlinkedModelSerializer
 from rest_framework import routers
+from django.db.models import Q
 
 try:
     from django.conf.urls.defaults import patterns, url, include
@@ -105,13 +106,12 @@ class CityModelViewSet(CitiesLightListModelViewSet):
         """
         Allows a GET param, 'q', to be used against search_names.
         """
-        queryset = super(CitiesLightListModelViewSet, self).get_queryset()
+        qs = super(CitiesLightListModelViewSet, self).get_queryset()
+        search = self.request.query_params.get('q', None)
+        if search:
+            qs = qs.filter(Q(search_names__icontains=search) | Q(name__icontains=search)
 
-        if self.request.GET.get('q', None):
-            return queryset.filter(
-                search_names__icontains=self.request.GET['q'])
-
-        return queryset
+        return qs
 
 
 router = routers.SimpleRouter()
