@@ -109,7 +109,7 @@ class CityModelViewSet(CitiesLightListModelViewSet):
         qs = super(CitiesLightListModelViewSet, self).get_queryset()
         search = self.request.query_params.get('q', None)
         if search:
-            qs = qs.filter(Q(search_names__icontains=search) | Q(name__icontains=search)
+            qs = qs.filter(Q(search_names__icontains=search) | Q(name__icontains=search))
 
         return qs
 
