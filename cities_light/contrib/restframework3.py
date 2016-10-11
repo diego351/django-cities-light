@@ -44,8 +44,7 @@ class CitySerializer(HyperlinkedModelSerializer):
 
     class Meta:
         model = City
-        exclude = ('slug',)
-
+        include = ('name', 'id')
 
 class RegionSerializer(HyperlinkedModelSerializer):
     """
