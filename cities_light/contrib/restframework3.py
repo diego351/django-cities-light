@@ -35,12 +35,12 @@ class CitySerializer(HyperlinkedModelSerializer):
     """
     HyperlinkedModelSerializer for City.
     """
-    url = relations.HyperlinkedIdentityField(
-        view_name='cities-light-api-city-detail')
-    country = relations.HyperlinkedRelatedField(
-        view_name='cities-light-api-country-detail', read_only=True)
-    region = relations.HyperlinkedRelatedField(
-        view_name='cities-light-api-region-detail', read_only=True)
+#    url = relations.HyperlinkedIdentityField(
+#        view_name='cities-light-api-city-detail')
+#    country = relations.HyperlinkedRelatedField(
+#        view_name='cities-light-api-country-detail', read_only=True)
+#    region = relations.HyperlinkedRelatedField(
+#        view_name='cities-light-api-region-detail', read_only=True)
 
     class Meta:
         model = City
