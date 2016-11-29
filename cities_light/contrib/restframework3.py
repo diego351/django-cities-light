@@ -45,7 +45,7 @@ class CitySerializer(HyperlinkedModelSerializer):
 
     class Meta:
         model = City
-        fields = ('name', 'id')
+        fields = ('name', 'id', 'display_name')
 
 class RegionSerializer(HyperlinkedModelSerializer):
     """
@@ -106,12 +106,14 @@ class CityModelViewSet(CitiesLightListModelViewSet):
         """
         Allows a GET param, 'q', to be used against search_names.
         """
-        qs = super(CitiesLightListModelViewSet, self).get_queryset()
-        search = self.request.query_params.get('q', None)
-        if search:
-            qs = qs.filter(Q(search_names__icontains=search) | Q(name__icontains=search))
+        qs = super(CitiesLightListModelViewSet, self).get_queryset().filter(population__gte==1000)
 
-        return qs
+        search = self.request.query_params.get('q', None)
+
+        if search:
+            qs = qs.filter(display_name__icontains=search)
+
+        return qs.order_by('-population')
 
 
 router = routers.SimpleRouter()
