@@ -106,7 +106,7 @@ class CityModelViewSet(CitiesLightListModelViewSet):
         """
         Allows a GET param, 'q', to be used against search_names.
         """
-        qs = super(CitiesLightListModelViewSet, self).get_queryset().filter(population__gte==1000)
+        qs = super(CitiesLightListModelViewSet, self).get_queryset().filter(population__gte=1000)
 
         search = self.request.query_params.get('q', None)
 
